@@ -1,0 +1,11 @@
+.layout {
+  display: grid;
+  grid-template-rows: 60px 1fr 60px;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.layout_main {
+  min-height: calc(100vh - 120px);
+  overflow-y: auto;
+}

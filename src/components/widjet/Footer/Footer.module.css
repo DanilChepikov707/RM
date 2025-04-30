@@ -1,0 +1,12 @@
+.footer {
+  padding: 20px 0 19px;
+  box-sizing: border-box;
+  box-shadow: -2px 0px 8px 2px rgba(0, 0, 0, 0.1);
+}
+
+.footer_text {
+  text-align: center;
+  font-family: "Karla", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}

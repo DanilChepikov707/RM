@@ -1,0 +1,22 @@
+.select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 17.5px 16px;
+  width: 240px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+
+  background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2210%22%20height%3D%225%22%20viewBox%3D%220%200%2010%205%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M0%200L5%205L10%200H0Z%22%20fill%3D%22black%22%20fill-opacity%3D%220.54%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 10px;
+  box-sizing: border-box;
+}

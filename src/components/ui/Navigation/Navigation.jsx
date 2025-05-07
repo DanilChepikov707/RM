@@ -2,6 +2,7 @@ import React from "react";
 import s from "./Navigation.module.css";
 import { links } from "./links";
 import { NavLink } from "react-router-dom";
+import clsx from "clsx";
 
 export const Navigation = () => {
   return (
@@ -11,7 +12,7 @@ export const Navigation = () => {
           <li key={id}>
             <NavLink
               className={({ isActive }) =>
-                isActive ? `${s.link} ${s.active}` : s.link
+                isActive ? clsx(s.link, s.active) : s.link
               }
               to={path}
             >

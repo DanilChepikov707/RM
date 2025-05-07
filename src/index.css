@@ -1,11 +1,12 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -53,4 +54,10 @@ li {
 
 img {
   display: block;
+}
+
+button {
+  appearance: none;
+  outline: none;
+  border: none;
 }

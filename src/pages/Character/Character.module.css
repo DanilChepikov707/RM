@@ -1,0 +1,52 @@
+.wrapper {
+  position: relative;
+}
+
+.wrapper_desc {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.section_title {
+  color: var(--Graybase-Gray-1, #8e8e93);
+  font-feature-settings: "liga" off, "clig" off;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  margin-top: 42px;
+  margin-bottom: 36px;
+}
+
+.episodes_list {
+  height: 370px;
+  overflow: scroll;
+}
+
+.episodes_list::-webkit-scrollbar {
+  width: 8px; /* обязательно задать размер */
+  display: unset;
+}
+
+.episodes_list::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3); /* стиль самого "ползунка" */
+  border-radius: 4px;
+}
+
+.btn_back {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  top: 44px;
+  cursor: pointer;
+}
+
+.btn_text {
+  color: #000;
+  font-family: Karla;
+  font-size: 18px;
+  font-weight: 700;
+}

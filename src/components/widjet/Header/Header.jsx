@@ -18,7 +18,6 @@ export const Header = () => {
             height={49}
           />
         </Link>
-
         <Navigation />
       </Container>
     </header>

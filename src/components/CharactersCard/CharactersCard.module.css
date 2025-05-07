@@ -1,0 +1,48 @@
+.card {
+  width: 240px;
+  height: 244px;
+
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.image_wrapper {
+  height: 170px;
+}
+
+.image_wrapper img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center -20px;
+}
+
+.text_wrapper {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  row-gap: 1px;
+}
+
+.name {
+  color: var(--Black-High-Emphasis, rgba(0, 0, 0, 0.87));
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+  letter-spacing: 0.15px;
+
+  white-space: nowrap; /* Запрет переноса */
+  overflow: hidden; /* Скрытие лишнего */
+  text-overflow: ellipsis; /* Добавление ... */
+  max-width: 100%; /* Для корректной работы */
+}
+
+.species {
+  color: var(--Black-Medium-Emphasis, rgba(0, 0, 0, 0.6));
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: 0.25px;
+}

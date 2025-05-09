@@ -34,19 +34,6 @@
   border-radius: 4px;
 }
 
-.btn_back {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: none;
-  top: 44px;
-  cursor: pointer;
-}
-
-.btn_text {
-  color: #000;
-  font-family: Karla;
-  font-size: 18px;
-  font-weight: 700;
+.wrapper_desc {
+  margin-bottom: 24px;
 }

@@ -4,6 +4,7 @@ import { Episodes } from "./pages/Episodes/Episodes";
 import { Character } from "./pages/Character/Character";
 import { Eror } from "./pages/Eror/Eror";
 import { Location } from "./pages/Location/Location";
+import { Episode } from "./pages/Episode/Episode";
 
 export const routes = [
   { path: "/", element: <Characters /> },
@@ -12,4 +13,5 @@ export const routes = [
   { path: "/character/:id", element: <Character /> },
   { path: "*", element: <Eror /> },
   { path: "/location/:id", element: <Location /> },
+  { path: "/episod/:id", element: <Episode /> },
 ];

@@ -26,20 +26,15 @@ export const Characters = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  console.log("isLoading", isLoading);
-
   const debouncedSearch = useDebounce(searchValue, 500);
-  //Нужна обработка loading и error
+  const linkApi = import.meta.env.VITE_RM_API;
 
-  useEffect(() => {
-    setCharacters([]);
-    setPage(1);
-  }, [debouncedSearch, speciesFilter, genderFilter, statusFilter]);
+  
 
   useEffect(() => {
     async function getCharacters() {
       try {
-        const url = `https://rickandmortyapi.com/api/character?name=${debouncedSearch}&species=${speciesFilter}&gender=${genderFilter}&status=${statusFilter}&page=${page}`;
+        const url = `${linkApi}/character?name=${debouncedSearch}&species=${speciesFilter}&gender=${genderFilter}&status=${statusFilter}&page=${page}`;
         const response = await fetch(url);
         const characterData = await response.json();
         console.log(characterData);
@@ -95,6 +90,7 @@ export const Characters = () => {
         <PageLogo src={pageIcon} alt="pageLogo" width={600} height={200} />
         <FilterWrapper>
           <FilterInput
+            size="small"
             placeholder="Filter by name..."
             value={searchValue}
             onChange={handleInput}

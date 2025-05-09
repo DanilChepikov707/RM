@@ -1,19 +1,18 @@
-.location {
+.episode {
   position: relative;
 }
 
-.residents {
+.cards {
+  margin: 24px 0;
+}
+
+.cast {
   color: #8e8e93;
   font-feature-settings: "liga" off, "clig" off;
-
   font-size: 20px;
   font-weight: 500;
   line-height: 24px;
   letter-spacing: 0.15px;
   margin-top: 64px;
   margin-bottom: 24px;
-}
-
-.cards {
-  margin: 24px 0;
 }

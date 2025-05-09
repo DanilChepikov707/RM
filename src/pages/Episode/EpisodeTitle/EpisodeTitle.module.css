@@ -1,0 +1,35 @@
+.title {
+    color: #081f32;
+    text-align: center;
+    font-feature-settings: "liga" off, "clig" off;
+    font-size: 36px;
+    font-weight: 400;
+    margin-top: 30px;
+  }
+  
+  .sub_title_wrapper {
+    display: flex;
+    column-gap: 219px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+  }
+  
+  .name {
+    color: #081f32;
+    font-feature-settings: "liga" off, "clig" off;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+  }
+  
+  .span {
+    color: #6e798c;
+    font-feature-settings: "liga" off, "clig" off;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+  }
+  

@@ -1,44 +1,42 @@
 import React, { useEffect, useState } from "react";
-import { Layout } from "../../components/widjet/Layout/Layout";
-import s from "./Location.module.css";
+import s from "./Episode.module.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { CharactersCard } from "../../components/CharactersCard/CharactersCard";
-import { LocationTitle } from "./LocatioTitle/LocationTitle";
 import { Spinner } from "../../components/ui/Spinner/Spinner";
-import { Cards } from "../../components/Cards/Cards";
-import { Link } from "react-router-dom";
 import { ButtonGoBack } from "../../components/ui/ButtonGoBack/ButtonGoBack";
-import { ButtonLoadMore } from "../../components/ui/ButtonLoadMore/ButtonLoadMore";
+import { Cards } from "../../components/Cards/Cards";
+import { Layout } from "../../components/widjet/Layout/Layout";
+import { EpisodeTitle } from "./EpisodeTitle/EpisodeTitle";
+import { CharactersCard } from "../../components/CharactersCard/CharactersCard";
 
-export const Location = () => {
+
+export const Episode = () => {
   const { id } = useParams();
-  const [location, setLocation] = useState(null);
+  const [episode, setEpisode] = useState(null);
   const [characters, setCharacters] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const linkApi = import.meta.env.VITE_RM_API;
 
-
   useEffect(() => {
-    async function getLocation() {
+    async function getEpisode() {
       try {
-        const url = `${linkApi}/location/${id}`;
+        const url = `${linkApi}/episode/${id}`;
         const response = await fetch(url);
-        const locationData = await response.json();
-        setLocation(locationData);
-        const residentsIds = locationData?.residents?.map(
+        const episodeData = await response.json();
+        setEpisode(episodeData);
+        const charactersIds = episodeData?.characters?.map(
           (el) => +el.split("/").pop()
         );
-        if (locationData.error) {
+
+        if (episodeData.error) {
           setError(true);
         }
 
-        if (residentsIds.length > 0) {
-          const url = `${linkApi}/character/${residentsIds}`;
+        if (charactersIds.length > 0) {
+          const url = `${linkApi}/character/${charactersIds}`;
           const response = await fetch(url);
           const characterData = await response.json();
-
           setCharacters(
             Array.isArray(characterData) ? characterData : [characterData]
           );
@@ -51,23 +49,21 @@ export const Location = () => {
         setIsLoading(false);
       }
     }
-    getLocation();
+    getEpisode();
   }, [id]);
 
-  console.log("loc", location);
-  console.log("char", characters);
+  console.log(episode);
 
   return (
     <Layout>
-      <section className={s.location}>
+      <section className={s.episode}>
         <ButtonGoBack onClick={() => navigate(-1)} />
-
-        <LocationTitle
-          name={location?.name}
-          type={location?.type}
-          dimension={location?.dimension}
+        <EpisodeTitle
+          name={episode?.name}
+          episode={episode?.episode}
+          air_date={episode?.air_date}
         />
-        <p className={s.residents}>Residents</p>
+        <p className={s.cast}>Cast</p>
         <Cards className={s.cards}>
           {isLoading && (
             <div className={s.spinner}>
@@ -85,3 +81,6 @@ export const Location = () => {
     </Layout>
   );
 };
+
+//изменить Link на кнопке Go Back на хук useNavigate
+// в option добаввить все эллементы фильтра

@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./CharacterInfo.module.css";
 import icon from "../../../../assets/character/icon.svg";
+import { Link } from "react-router-dom";
 
 export const CharacterInfo = ({
   gender,
@@ -9,7 +10,11 @@ export const CharacterInfo = ({
   origin,
   type,
   location,
+  url,
 }) => {
+  const locationId = +url.split("/").pop();
+  console.log(locationId);
+
   return (
     <div className={s.wrapper}>
       <h2 className={s.title}>Informations</h2>
@@ -34,11 +39,15 @@ export const CharacterInfo = ({
           <span className={s.info_label}>Type</span>
           <span className={s.info_value}>{type || "Unknown"}</span>
         </div>
-        <div className={s.info_item}>
-          <button className={s.icon}><img src={icon} alt="icon" /></button>
-          <span className={s.info_label}>Location</span>
-          <span className={s.info_value}>{location}</span>
-        </div>
+        <Link to={`/location/${locationId}`}>
+          <div className={s.info_item}>
+            <button className={s.icon}>
+              <img src={icon} alt="icon" />
+            </button>
+            <span className={s.info_label}>Location</span>
+            <span className={s.info_value}>{location}</span>
+          </div>
+        </Link>
       </div>
     </div>
   );

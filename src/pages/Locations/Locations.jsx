@@ -12,6 +12,7 @@ import { useDebounce } from "../../hooks/useDebounce";
 import { locationTypes, locationDimensions } from "../Characters/options";
 import { ButtonLoadMore } from "../../components/ui/ButtonLoadMore/ButtonLoadMore";
 import { Spinner } from "../../components/ui/Spinner/Spinner";
+import { Link } from "react-router-dom";
 
 export const Locations = () => {
   const [locations, setLocations] = useState([]);
@@ -26,6 +27,7 @@ export const Locations = () => {
   console.log("loca", locations);
 
   const debouncedSearch = useDebounce(searchValue, 500);
+  const linkApi = import.meta.env.VITE_RM_API;
 
   useEffect(() => {
     setLocations([]);
@@ -36,14 +38,13 @@ export const Locations = () => {
     async function getLocations() {
       setIsLoading(true);
       try {
-        const url = `https://rickandmortyapi.com/api/location?name=${debouncedSearch}&type=${typeValue}&dimension=${dimensionValue}&page=${page}`;
+        const url = `${linkApi}/location?name=${debouncedSearch}&type=${typeValue}&dimension=${dimensionValue}&page=${page}`;
         const response = await fetch(url);
         const locationData = await response.json();
 
         if (locationData.error) {
           setError(true);
         }
-        console.log("locData", locationData);
 
         if (locationData?.info?.next) {
           setHasNextPage(true);
@@ -110,6 +111,7 @@ export const Locations = () => {
         <PageLogo src={pageIcon} alt="pageLogo" width={326} height={202} />
         <FilterWrapper>
           <FilterInput
+            size="medium"
             placeholder="Filter by name..."
             value={searchValue}
             onChange={handleInput}
@@ -125,7 +127,7 @@ export const Locations = () => {
             onChange={handelDimension}
           />
         </FilterWrapper>
-        <Cards>
+        <Cards >
           {isLoading && (
             <div className={s.spinner}>
               <Spinner />
@@ -133,14 +135,20 @@ export const Locations = () => {
           )}
           {!isLoading &&
             !error &&
-            locations?.map((location) => (
-              <UniCard
-                name={location.name}
-                type={location.type}
-                id={location.id}
-                key={location.id}
-              />
-            ))}
+            locations?.map((location) => {
+              console.log(location);
+              return (
+                <Link to={`/location/${location.id}`}>
+                  <UniCard
+                    residents={location.residents}
+                    name={location.name}
+                    type={location.type}
+                    id={location.id}
+                    key={location.id}
+                  />
+                </Link>
+              );
+            })}
           {error && <div className={s.error_message}>Ничего не найдено</div>}
         </Cards>
         {locations.length > 0 && hasNextPage && (

@@ -8,4 +8,9 @@
 .layout_main {
   min-height: calc(100vh - 120px);
   overflow-y: auto;
+
+  @media (width <= 767px) {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 }

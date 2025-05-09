@@ -6,10 +6,19 @@
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+
+  @media (width <= 767px) {
+    width: 312px;
+    height: 308px;
+  }
 }
 
 .image_wrapper {
   height: 170px;
+
+  @media (width <= 767px) {
+    height: 232px;
+  }
 }
 
 .image_wrapper img {
@@ -25,6 +34,8 @@
   flex-direction: column;
   text-align: left;
   row-gap: 1px;
+
+  @media (width <= 767px);
 }
 
 .name {

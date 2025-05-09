@@ -14,6 +14,9 @@ import { CharactersCard } from "../../components/CharactersCard/CharactersCard";
 import { ButtonLoadMore } from "../../components/ui/ButtonLoadMore/ButtonLoadMore";
 import { useDebounce } from "../../hooks/useDebounce";
 import { Spinner } from "../../components/ui/Spinner/Spinner";
+import { ButtonFilters } from "../../components/ui/ButtonFilters/ButtonFilters";
+import { Modal } from "../../components/ui/Modal/Modal";
+import { MobailFilters } from "../../components/MobailFilters/MobailFilters";
 
 export const Characters = () => {
   const [characters, setCharacters] = useState([]);
@@ -25,11 +28,30 @@ export const Characters = () => {
   const [hasNextPage, setHasNextPage] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [isSelect, setIsSelect] = useState(true);
+  const [isModal, setIsModal] = useState(false);
 
   const debouncedSearch = useDebounce(searchValue, 500);
   const linkApi = import.meta.env.VITE_RM_API;
 
-  
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIsSelect(false);
+      } else {
+        setIsSelect(true);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    // Важно: удалить обработчик при размонтировании
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     async function getCharacters() {
@@ -84,6 +106,10 @@ export const Characters = () => {
   };
   const handlePage = () => setPage(page + 1);
 
+  const handleModal = () => setIsModal(true);
+
+  const handleHideModal = () => setIsModal(false);
+
   return (
     <Layout>
       <section className={s.wrapper}>
@@ -95,21 +121,28 @@ export const Characters = () => {
             value={searchValue}
             onChange={handleInput}
           />
-          <FilterSelect
-            value={speciesFilter}
-            optionsList={speciesOptions}
-            onChange={handleSpeciesFilter}
-          />
-          <FilterSelect
-            value={genderFilter}
-            optionsList={genderOptions}
-            onChange={handleGenderFilter}
-          />
-          <FilterSelect
-            value={statusFilter}
-            optionsList={statusOptions}
-            onChange={handleStatusFilter}
-          />
+          {isSelect && (
+            <FilterSelect
+              value={speciesFilter}
+              optionsList={speciesOptions}
+              onChange={handleSpeciesFilter}
+            />
+          )}
+          {isSelect && (
+            <FilterSelect
+              value={genderFilter}
+              optionsList={genderOptions}
+              onChange={handleGenderFilter}
+            />
+          )}
+          {isSelect && (
+            <FilterSelect
+              value={statusFilter}
+              optionsList={statusOptions}
+              onChange={handleStatusFilter}
+            />
+          )}
+          {!isSelect && <ButtonFilters onClick={handleModal} />}
         </FilterWrapper>
         <Cards>
           {isLoading && (
@@ -126,6 +159,22 @@ export const Characters = () => {
         </Cards>
         {characters.length > 0 && hasNextPage && (
           <ButtonLoadMore onClick={handlePage} />
+        )}
+        {isModal && (
+          <Modal>
+            <MobailFilters
+              value={speciesFilter}
+              optionsList={speciesOptions}
+              onChange={handleSpeciesFilter}
+              valueGender={genderFilter}
+              optionsListGender={genderOptions}
+              onChangeGender={handleGenderFilter}
+              valueStatus={statusFilter}
+              optionsListStatus={statusOptions}
+              onChangeStatus={handleStatusFilter}
+              closeModal={handleHideModal}
+            />
+          </Modal>
         )}
       </section>
     </Layout>

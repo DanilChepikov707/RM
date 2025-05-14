@@ -5,9 +5,14 @@
   column-gap: 20px;
   margin-top: 16px;
 
-  @media (width <= 767px) {
-    margin-top: 32px;
+  @media (width <= 1070px) {
+    padding-left: 24px;
+    padding-right: 24px;
     flex-direction: column;
     row-gap: 16px;
+  }
+
+  @media (width <= 767px) {
+    margin-top: 32px;
   }
 }

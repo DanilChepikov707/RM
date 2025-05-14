@@ -13,6 +13,9 @@ import { locationTypes, locationDimensions } from "../Characters/options";
 import { ButtonLoadMore } from "../../components/ui/ButtonLoadMore/ButtonLoadMore";
 import { Spinner } from "../../components/ui/Spinner/Spinner";
 import { Link } from "react-router-dom";
+import { ButtonFilters } from "../../components/ui/ButtonFilters/ButtonFilters";
+import { Modal } from "../../components/ui/Modal/Modal";
+import { MobileLocationFilters } from "../../components/MobailLocationFilters/MobailLocationFilters";
 
 export const Locations = () => {
   const [locations, setLocations] = useState([]);
@@ -23,6 +26,8 @@ export const Locations = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasNextPage, setHasNextPage] = useState(true);
   const [error, setError] = useState(false);
+  const [isSelect, setIsSelect] = useState(true);
+  const [isModal, setIsModal] = useState(false);
 
   console.log("loca", locations);
 
@@ -30,9 +35,27 @@ export const Locations = () => {
   const linkApi = import.meta.env.VITE_RM_API;
 
   useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 1070) {
+        setIsSelect(false);
+      } else {
+        setIsSelect(true);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  /*   useEffect(() => {
     setLocations([]);
     setPage(1);
-  }, [debouncedSearch, typeValue, dimensionValue]);
+  }, [debouncedSearch, typeValue, dimensionValue]); */
 
   useEffect(() => {
     async function getLocations() {
@@ -66,7 +89,7 @@ export const Locations = () => {
       }
     }
     getLocations();
-  }, [typeValue, debouncedSearch, dimensionValue, page]);
+  }, [typeValue, debouncedSearch, dimensionValue, page, linkApi]);
 
   /* const locationTypes = useMemo(() => {
     // 1. Собираем уникальные типы
@@ -105,6 +128,10 @@ export const Locations = () => {
   };
   const handlePage = () => setPage(page + 1);
 
+  const handleModal = () => setIsModal(true);
+
+  const handleHideModal = () => setIsModal(false);
+
   return (
     <Layout>
       <section className={s.wrapper}>
@@ -116,18 +143,23 @@ export const Locations = () => {
             value={searchValue}
             onChange={handleInput}
           />
-          <FilterSelect
-            value={typeValue}
-            optionsList={locationTypes}
-            onChange={handleType}
-          />
-          <FilterSelect
-            value={dimensionValue}
-            optionsList={locationDimensions}
-            onChange={handelDimension}
-          />
+          {isSelect && (
+            <FilterSelect
+              value={typeValue}
+              optionsList={locationTypes}
+              onChange={handleType}
+            />
+          )}
+          {isSelect && (
+            <FilterSelect
+              value={dimensionValue}
+              optionsList={locationDimensions}
+              onChange={handelDimension}
+            />
+          )}
+          {!isSelect && <ButtonFilters onClick={handleModal} />}
         </FilterWrapper>
-        <Cards >
+        <Cards>
           {isLoading && (
             <div className={s.spinner}>
               <Spinner />
@@ -138,13 +170,12 @@ export const Locations = () => {
             locations?.map((location) => {
               console.log(location);
               return (
-                <Link to={`/location/${location.id}`}>
+                <Link to={`/location/${location.id}`} key={location.id}>
                   <UniCard
                     residents={location.residents}
                     name={location.name}
                     type={location.type}
                     id={location.id}
-                    key={location.id}
                   />
                 </Link>
               );
@@ -153,6 +184,19 @@ export const Locations = () => {
         </Cards>
         {locations.length > 0 && hasNextPage && (
           <ButtonLoadMore onClick={handlePage} />
+        )}
+        {isModal && (
+          <Modal>
+            <MobileLocationFilters
+              valueType={typeValue}
+              optionsListType={locationTypes}
+              onChangeType={handleType}
+              valueDimension={dimensionValue}
+              optionsListDimension={locationDimensions}
+              onChangeDimension={handelDimension}
+              closeModal={handleHideModal}
+            />
+          </Modal>
         )}
       </section>
     </Layout>

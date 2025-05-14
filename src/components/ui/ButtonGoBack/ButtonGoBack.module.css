@@ -6,6 +6,10 @@
   background: none;
   top: 44px;
   cursor: pointer;
+
+  @media (width <= 767px) {
+    top: -40px;
+  }
 }
 
 .btn_text {

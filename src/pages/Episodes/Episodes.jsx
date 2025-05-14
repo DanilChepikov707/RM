@@ -23,10 +23,10 @@ export const Episodes = () => {
   const debouncedSearch = useDebounce(searchValue, 500);
   const linkApi = import.meta.env.VITE_RM_API;
 
-  useEffect(() => {
+  /*  useEffect(() => {
     setEpisodes([]);
     setPage(1);
-  }, [debouncedSearch]);
+  }, [debouncedSearch]); */
 
   useEffect(() => {
     async function getEpisodes() {
@@ -92,11 +92,10 @@ export const Episodes = () => {
           {!isLoading &&
             !error &&
             episodes?.map((episode) => (
-              <Link to={`/episod/${episode.id}`}>
+              <Link to={`/episode/${episode.id}`} key={episode.id}>
                 <UniCard
                   name={episode.name}
                   id={episode.id}
-                  key={episode.id}
                   air_date={episode.air_date}
                   episode={episode.episode}
                 />

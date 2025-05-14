@@ -13,5 +13,5 @@ export const routes = [
   { path: "/character/:id", element: <Character /> },
   { path: "*", element: <Eror /> },
   { path: "/location/:id", element: <Location /> },
-  { path: "/episod/:id", element: <Episode /> },
+  { path: "/episode/:id", element: <Episode /> },
 ];

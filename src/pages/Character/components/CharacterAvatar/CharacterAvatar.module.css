@@ -8,6 +8,13 @@
   border: 5px solid var(--Graybase-Gray-6, #f2f2f7);
   background: url(<path-to-image>) lightgray 50% / cover no-repeat;
   margin-top: 16px;
+
+  @media (width <= 767px) {
+    width: 146px;
+    height: 148px;
+    flex-shrink: 0;
+    margin-top: 64px;
+  }
 }
 
 .name {
@@ -17,4 +24,8 @@
   font-size: 48px;
   font-weight: 400;
   margin-top: 16px;
+
+  @media (width <= 767px) {
+    font-size: 32px;
+  }
 }

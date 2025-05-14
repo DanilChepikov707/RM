@@ -12,6 +12,14 @@
   flex-direction: column;
   row-gap: 1px;
   cursor: pointer;
+
+  @media (width <= 767px) {
+    width: 312px;
+  }
+
+  @media (width <= 374px) {
+    width: 272px;
+  }
 }
 
 .name {

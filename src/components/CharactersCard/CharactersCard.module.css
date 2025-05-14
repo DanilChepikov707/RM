@@ -11,6 +11,10 @@
     width: 312px;
     height: 308px;
   }
+
+  @media (width <= 374px) {
+    width: 272px;
+  }
 }
 
 .image_wrapper {

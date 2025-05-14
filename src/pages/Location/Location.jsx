@@ -19,7 +19,6 @@ export const Location = () => {
   const navigate = useNavigate();
   const linkApi = import.meta.env.VITE_RM_API;
 
-
   useEffect(() => {
     async function getLocation() {
       try {
@@ -60,7 +59,10 @@ export const Location = () => {
   return (
     <Layout>
       <section className={s.location}>
-        <ButtonGoBack onClick={() => navigate(-1)} />
+        <ButtonGoBack
+          onClick={() => navigate(-1)}
+          className={s.button_back_location}
+        />
 
         <LocationTitle
           name={location?.name}

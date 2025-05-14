@@ -5,7 +5,7 @@ import appLogo from "../../../assets/header/logo-header.svg";
 import { Container } from "../../ui/Container/Container";
 import { Link } from "react-router-dom";
 
-export const Header = () => {
+export const Header = ({ onClick, isBurger }) => {
   return (
     <header className={s.header}>
       <Container className={s.header_container}>
@@ -18,7 +18,7 @@ export const Header = () => {
             height={49}
           />
         </Link>
-        <Navigation />
+        <Navigation onClick={onClick} isBurger={isBurger} />
       </Container>
     </header>
   );

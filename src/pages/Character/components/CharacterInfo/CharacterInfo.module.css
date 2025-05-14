@@ -6,6 +6,7 @@
   font-size: 20px;
   font-weight: 500;
   margin-top: 42px;
+  padding-left: 12px;
 }
 
 .wrapper_container {
@@ -20,6 +21,10 @@
   width: 413px;
   padding: 9px 0 0 16px;
   position: relative;
+
+  @media (width <= 767px) {
+    width: 312px;
+  }
 }
 
 .info_label {

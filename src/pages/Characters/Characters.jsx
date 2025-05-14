@@ -31,12 +31,14 @@ export const Characters = () => {
   const [isSelect, setIsSelect] = useState(true);
   const [isModal, setIsModal] = useState(false);
 
+  console.log("char", characters);
+
   const debouncedSearch = useDebounce(searchValue, 500);
   const linkApi = import.meta.env.VITE_RM_API;
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 768) {
+      if (window.innerWidth <= 1070) {
         setIsSelect(false);
       } else {
         setIsSelect(true);
@@ -47,7 +49,6 @@ export const Characters = () => {
 
     window.addEventListener("resize", handleResize);
 
-    // Важно: удалить обработчик при размонтировании
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -85,7 +86,14 @@ export const Characters = () => {
       }
     }
     getCharacters();
-  }, [debouncedSearch, speciesFilter, genderFilter, statusFilter, page]);
+  }, [
+    debouncedSearch,
+    speciesFilter,
+    genderFilter,
+    statusFilter,
+    page,
+    linkApi,
+  ]);
 
   console.log(characters);
 
@@ -109,6 +117,13 @@ export const Characters = () => {
   const handleModal = () => setIsModal(true);
 
   const handleHideModal = () => setIsModal(false);
+
+  const arrNumbers = [];
+  let count = 0;
+  while (count <= 10) {
+    arrNumbers.push(count);
+    count++;
+  }
 
   return (
     <Layout>
@@ -180,11 +195,3 @@ export const Characters = () => {
     </Layout>
   );
 };
-
-// подредактировать стили фильтров(стрелка у select)
-
-//попробовать разобраться со спинером и загрузкой
-// Обработать ошибки( если результатов нету вовсе, то выводить сообщение)
-
-// Сделать кнопку Go back
-// Оптимизировать изображения (из png в webp, если плохое качество, то скачать с figma в 2x)

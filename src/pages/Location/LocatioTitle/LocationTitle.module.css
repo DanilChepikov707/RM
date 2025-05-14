@@ -5,6 +5,11 @@
   font-size: 36px;
   font-weight: 400;
   margin-top: 30px;
+
+  @media (width <= 767px) {
+    font-size: 32px;
+    margin-top: 64px;
+  }
 }
 
 .sub_title_wrapper {
@@ -13,6 +18,28 @@
   justify-content: center;
   align-items: center;
   margin-top: 24px;
+
+  @media (width <= 767px) {
+    flex-direction: column;
+    row-gap: 15px;
+    align-items: center;
+  }
+}
+
+.type_wrapper {
+  @media (width <= 767px) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+.dimension_wrapper {
+  @media (width <= 767px) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
 }
 
 .name {

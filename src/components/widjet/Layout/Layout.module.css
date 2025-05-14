@@ -9,6 +9,11 @@
   min-height: calc(100vh - 120px);
   overflow-y: auto;
 
+  @media (width <= 1070px) {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
   @media (width <= 767px) {
     padding-left: 24px;
     padding-right: 24px;
